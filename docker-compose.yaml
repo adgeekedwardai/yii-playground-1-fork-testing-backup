@@ -1,8 +1,11 @@
 version: '3'
 services:
 
+  # https://medium.com/redbubble/running-a-docker-container-as-a-non-root-user-7d2e00f8ee15
+  # => use this command instead->  CURRENT_UID=$(id -u):$(id -g) docker-compose up
   #PHP Service
-  app:
+  app:   
+    user: ${CURRENT_UID}  # THIS BIT!!!1! 
     build:
       context: ./app
       dockerfile: Dockerfile
